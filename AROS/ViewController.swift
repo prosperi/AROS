@@ -35,7 +35,15 @@ class ViewController: UIViewController {
     
     @IBAction func add(_ sender: Any) {
         let node = SCNNode()
-        node.geometry = SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0.015)
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 0.1))
+        path.addLine(to: CGPoint(x: 0.1, y: 0.15))
+        path.addLine(to: CGPoint(x: 0.2, y: 0.1))
+        path.addLine(to: CGPoint(x: 0.2, y: 0))
+        let shape = SCNShape(path: path, extrusionDepth: 0.1)
+        node.geometry = shape
+        
         node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
         node.geometry?.firstMaterial?.specular.contents = UIColor.red
         
