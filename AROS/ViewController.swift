@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
+    let node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
 
     
     override func viewDidLoad() {
@@ -29,29 +30,48 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func slide(_ sender: UISlider) {
-        print("interesting")
+    @IBAction func slideX(_ sender: UISlider) {
+        self.node.eulerAngles = SCNVector3(
+            Float(sender.value) * .pi / 180,
+            self.node.eulerAngles.y,
+            self.node.eulerAngles.z
+        )
+    }
+    
+    @IBAction func slideZ(_ sender: UISlider) {
+         self.node.eulerAngles = SCNVector3(
+            self.node.eulerAngles.x,
+            self.node.eulerAngles.y,
+            Float(sender.value) * .pi / 180
+        )
+    }
+    
+    @IBAction func slideY(_ sender: UISlider) {
+         self.node.eulerAngles = SCNVector3(
+            self.node.eulerAngles.x,
+            Float(sender.value) * .pi / 180,
+            self.node.eulerAngles.z
+        )
     }
     
     @IBAction func add(_ sender: Any) {
         let door = SCNNode(geometry: SCNPlane(width: 0.03, height: 0.06))
         let box = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
-        let node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
         
         door.geometry?.firstMaterial?.diffuse.contents = UIColor.brown
         box.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
 
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-        node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
 
-        node.position = SCNVector3(0.3, 0.3, 0.3)
+        self.node.position = SCNVector3(0.3, 0.3, 0.3)
         box.position = SCNVector3(0, -0.05, 0)
         door.position = SCNVector3(0, -0.02, 0.051)
         
-        node.addChildNode(box)
+        self.node.addChildNode(box)
         box.addChildNode(door)
         
-        self.sceneView.scene.rootNode.addChildNode(node)
+        self.sceneView.scene.rootNode.addChildNode(self.node)
     }
 
 
