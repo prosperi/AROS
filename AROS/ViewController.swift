@@ -34,24 +34,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func add(_ sender: Any) {
-        let node = SCNNode()
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 0.1))
-        path.addLine(to: CGPoint(x: 0.1, y: 0.15))
-        path.addLine(to: CGPoint(x: 0.2, y: 0.1))
-        path.addLine(to: CGPoint(x: 0.2, y: 0))
-        let shape = SCNShape(path: path, extrusionDepth: 0.1)
-        node.geometry = shape
+        let door = SCNNode(geometry: SCNPlane(width: 0.03, height: 0.06))
+        let box = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+        let node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
         
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
-        node.geometry?.firstMaterial?.specular.contents = UIColor.red
-        
-        let x = random(a: -1, b: 1)
-        let y = random(a: -1, b: 1)
-        let z = random(a: -1, b: 1)
+        door.geometry?.firstMaterial?.diffuse.contents = UIColor.brown
+        box.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
 
-        node.position = SCNVector3(x, y, z)
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+
+        node.position = SCNVector3(0.3, 0.3, 0.3)
+        box.position = SCNVector3(0, -0.05, 0)
+        door.position = SCNVector3(0, -0.02, 0.051)
+        
+        node.addChildNode(box)
+        box.addChildNode(door)
+        
         self.sceneView.scene.rootNode.addChildNode(node)
     }
 
