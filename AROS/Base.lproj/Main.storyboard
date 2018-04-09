@@ -77,6 +77,15 @@
                                     <action selector="slideZ:" destination="BYZ-38-t0r" eventType="valueChanged" id="GGO-Td-dOK"/>
                                 </connections>
                             </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="GAz-lC-9lt">
+                                <rect key="frame" x="666" y="120" width="154" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="hYw-h6-VlW"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="slideScale:" destination="BYZ-38-t0r" eventType="valueChanged" id="MfA-31-rzF"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -89,6 +98,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5BW-B4-d2l" secondAttribute="bottom" constant="31" id="SoV-HE-2pr"/>
                             <constraint firstItem="blw-OO-bYj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="UDS-i7-Ywv"/>
                             <constraint firstItem="UBn-eQ-SC1" firstAttribute="leading" secondItem="5BW-B4-d2l" secondAttribute="trailing" constant="35" id="XDg-L5-b8W"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GAz-lC-9lt" secondAttribute="trailing" constant="-50" id="cVr-2t-XFz"/>
                             <constraint firstItem="e59-ck-NPr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="cvT-sj-LcP"/>
                             <constraint firstItem="e59-ck-NPr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="f1N-El-w5Q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e59-ck-NPr" secondAttribute="bottom" constant="20" id="fdz-M1-QmH"/>
@@ -96,6 +106,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UBn-eQ-SC1" secondAttribute="bottom" constant="31" id="jZv-oM-75u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e59-ck-NPr" secondAttribute="bottom" constant="20" id="on6-Vf-nZi"/>
                             <constraint firstItem="blw-OO-bYj" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="orh-ka-06D"/>
+                            <constraint firstItem="GAz-lC-9lt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="rR2-CH-j2u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hCb-0I-glQ" secondAttribute="trailing" constant="16" id="s5w-QN-zXR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6lJ-Fn-Icg" secondAttribute="bottom" constant="31" id="w8Q-6n-VZS"/>
                         </constraints>
@@ -103,11 +114,12 @@
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="blw-OO-bYj" id="oPA-qe-UeH"/>
+                        <outlet property="slideScale" destination="GAz-lC-9lt" id="RyM-Ef-ti2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+            <point key="canvasLocation" x="136.71875" y="132.421875"/>
         </scene>
     </scenes>
 </document>

@@ -12,6 +12,9 @@ import ARKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var matrixLabel: UILabel!
+    @IBOutlet weak var slideScale: UISlider!
+    
     let configuration = ARWorldTrackingConfiguration()
     let node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
 
@@ -20,8 +23,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        self.sceneView.showsStatistics = true
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
+        
+        slideScale.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +57,14 @@ class ViewController: UIViewController {
             self.node.eulerAngles.x,
             Float(sender.value) * .pi / 180,
             self.node.eulerAngles.z
+        )
+    }
+    
+    @IBAction func slideScale(_ sender: UISlider) {
+        self.node.scale = SCNVector3(
+            x: Float(sender.value),
+            y: Float(sender.value),
+            z: Float(sender.value)
         )
     }
     
