@@ -21,6 +21,78 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blw-OO-bYj">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEy-Gx-Jvn">
+                                <rect key="frame" x="498" y="20" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.4877157499" green="0.50776479399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Tube">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="tube:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7a1-4W-3md"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqx-7I-UU8">
+                                <rect key="frame" x="329" y="20" width="77" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.4877157499" green="0.50776479399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Cylinder">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cylinder:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jeh-8i-QBB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDS-iw-1mX">
+                                <rect key="frame" x="414" y="20" width="76" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.4877157499" green="0.50776479399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Capsule">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="capsule:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gdu-ay-jeL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6C6-2y-yGO">
+                                <rect key="frame" x="244" y="20" width="77" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.4877157499" green="0.50776479399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Pyramid">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pyramid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FlP-b6-bCt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBv-WG-Fg9">
+                                <rect key="frame" x="166" y="20" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.4877157499" green="0.50776479399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Cone">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cone:" destination="BYZ-38-t0r" eventType="touchUpInside" id="opV-tp-czh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qve-st-vxe">
+                                <rect key="frame" x="10" y="20" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.4877157499" green="0.50776479399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Cube">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cube:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rd9-Gb-7az"/>
+                                </connections>
+                            </button>
                             <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="360" translatesAutoresizingMaskIntoConstraints="NO" id="5BW-B4-d2l">
                                 <rect key="frame" x="304" y="963" width="150" height="31"/>
                                 <constraints>
@@ -64,7 +136,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="add:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Na-8J-deP"/>
                                     <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U9l-ZL-oCA"/>
                                 </connections>
                             </button>
@@ -77,8 +148,8 @@
                                     <action selector="slideZ:" destination="BYZ-38-t0r" eventType="valueChanged" id="GGO-Td-dOK"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="GAz-lC-9lt">
-                                <rect key="frame" x="666" y="120" width="154" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="GAz-lC-9lt">
+                                <rect key="frame" x="666" y="220" width="154" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="hYw-h6-VlW"/>
                                 </constraints>
@@ -86,6 +157,30 @@
                                     <action selector="slideScale:" destination="BYZ-38-t0r" eventType="valueChanged" id="MfA-31-rzF"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoP-xa-VQX">
+                                <rect key="frame" x="88" y="20" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.48771574993013167" green="0.50776479396897656" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Sphere">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="sphere:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4dm-z0-OZ4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvU-Xb-hNh">
+                                <rect key="frame" x="576" y="20" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.4877157499" green="0.50776479399999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Torus">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="torus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="81H-du-iV2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -106,7 +201,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UBn-eQ-SC1" secondAttribute="bottom" constant="31" id="jZv-oM-75u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e59-ck-NPr" secondAttribute="bottom" constant="20" id="on6-Vf-nZi"/>
                             <constraint firstItem="blw-OO-bYj" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="orh-ka-06D"/>
-                            <constraint firstItem="GAz-lC-9lt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="rR2-CH-j2u"/>
+                            <constraint firstItem="GAz-lC-9lt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="rR2-CH-j2u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hCb-0I-glQ" secondAttribute="trailing" constant="16" id="s5w-QN-zXR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6lJ-Fn-Icg" secondAttribute="bottom" constant="31" id="w8Q-6n-VZS"/>
                         </constraints>

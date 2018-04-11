@@ -16,18 +16,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var slideScale: UISlider!
     
     let configuration = ARWorldTrackingConfiguration()
-    let node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
+    var node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
 
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-        self.sceneView.showsStatistics = true
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
         
-        slideScale.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
+        self.slideScale.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,6 +91,102 @@ class ViewController: UIViewController {
 
     @IBAction func reset(_ sender: Any) {
         self.restartSession()
+    }
+    
+    @IBAction func cube(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
+    }
+    
+    @IBAction func sphere(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNSphere(radius: 0.1))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
+    }
+    
+    @IBAction func cone(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNCone(topRadius: 0.3, bottomRadius: 0.5, height: 0.7))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
+    }
+    
+    @IBAction func pyramid(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNPyramid(width: 0.5, height: 0.5, length: 0.5))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
+    }
+    
+    @IBAction func cylinder(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNCylinder(radius: 0.3, height: 0.5))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
+    }
+    
+    @IBAction func capsule(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNCapsule(capRadius: 0.3, height: 0.5))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
+    }
+    
+    @IBAction func tube(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNTube(innerRadius: 0.3, outerRadius: 0.5, height: 1))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
+    }
+    
+    @IBAction func torus(_ sender: Any) {
+        self.node.removeFromParentNode()
+        
+        self.node = SCNNode(geometry: SCNTorus(ringRadius: 0.5, pipeRadius: 0.1))
+        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        self.node.position = SCNVector3(0, 0, 0)
+        
+        self.sceneView.scene.rootNode.addChildNode(self.node)
     }
     
     func restartSession () {
