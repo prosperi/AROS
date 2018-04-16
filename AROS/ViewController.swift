@@ -9,25 +9,28 @@
 import UIKit
 import ARKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var matrixLabel: UILabel!
     @IBOutlet weak var slideScale: UISlider!
-    
+    @IBOutlet weak var draw: UIButton!
+
     let configuration = ARWorldTrackingConfiguration()
     var node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
-
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configuration.planeDetection = .horizontal
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
+        self.sceneView.delegate = self
         
         self.slideScale.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
+        self.draw.layer.cornerRadius = 10
+        self.draw.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +38,55 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        
+        let width = CGFloat(planeAnchor.extent.x)
+        let height = CGFloat(planeAnchor.extent.z)
+        let plane = SCNPlane(width: width, height: height)
+        
+        plane.materials.first?.diffuse.contents = UIColor.red
+        let tmp = SCNNode(geometry: plane)
+        tmp.position = SCNVector3(
+            CGFloat(planeAnchor.center.x),
+            CGFloat(planeAnchor.center.y),
+            CGFloat(planeAnchor.center.z)
+        )
+        tmp.eulerAngles.x = -.pi / 2
+        
+        node.addChildNode(tmp)
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        guard let pointOfView = sceneView.pointOfView else {return}
+        
+        let transform = pointOfView.transform
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+    
+        let position = orientation + location
+        
+        DispatchQueue.main.async {
+            if self.draw.isHighlighted {
+                let node = SCNNode(geometry: SCNSphere(radius: 0.01))
+                node.position = position
+                self.sceneView.scene.rootNode.addChildNode(node)
+                node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+            } else {
+                let pointer = SCNNode(geometry: SCNSphere(radius: 0.005))
+                pointer.position = position
+                pointer.name = "pointer"
+                self.sceneView.scene.rootNode.enumerateChildNodes({ (node, _) in
+                    if node.name == "pointer" {
+                        node.removeFromParentNode()
+                    }
+                })
+                self.sceneView.scene.rootNode.addChildNode(pointer)
+                pointer.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            }
+        }
+        
+    }
     
     @IBAction func slideX(_ sender: UISlider) {
         self.node.eulerAngles = SCNVector3(
@@ -199,4 +251,9 @@ class ViewController: UIViewController {
         return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(a - b) + min (a, b)
     }
 }
+
+func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+    return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
+}
+
 
