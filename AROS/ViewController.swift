@@ -15,13 +15,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var matrixLabel: UILabel!
     @IBOutlet weak var slideScale: UISlider!
     @IBOutlet weak var draw: UIButton!
-
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var angle: UILabel!
+    
     let configuration = ARWorldTrackingConfiguration()
     var node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
+    var floor: SCNNode?
+    var currentTime = 0
+    var wall: SCNVector3?
+    var lastOrientation = SCNVector3(0,0,0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 11.3, *) {
+            configuration.planeDetection = .vertical
+        } else {
+            // Fallback on earlier versions
+        }
         configuration.planeDetection = .horizontal
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         self.sceneView.session.run(configuration)
@@ -31,6 +42,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.slideScale.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
         self.draw.layer.cornerRadius = 10
         self.draw.clipsToBounds = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,30 +53,83 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
+        if self.floor?.name == "floor" {return}
+        
         let width = CGFloat(planeAnchor.extent.x)
         let height = CGFloat(planeAnchor.extent.z)
         let plane = SCNPlane(width: width, height: height)
         
-        plane.materials.first?.diffuse.contents = UIColor.red
-        let tmp = SCNNode(geometry: plane)
-        tmp.position = SCNVector3(
+        plane.materials.first?.diffuse.contents = UIColor(red: 0, green: 0, blue: 1, alpha: 0.7)
+        
+        let floor = SCNNode(geometry: plane)
+        floor.position = SCNVector3(
             CGFloat(planeAnchor.center.x),
             CGFloat(planeAnchor.center.y),
             CGFloat(planeAnchor.center.z)
         )
-        tmp.eulerAngles.x = -.pi / 2
+        floor.eulerAngles.x = -.pi / 2
+        floor.name = "floor"
         
-        node.addChildNode(tmp)
+        node.name = "floor"
+        node.addChildNode(floor)
+        self.floor = floor
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+
+        
         guard let pointOfView = sceneView.pointOfView else {return}
+        
         
         let transform = pointOfView.transform
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-    
+        let angles = pointOfView.eulerAngles
+       
+      
         let position = orientation + location
+
+        if abs(angles.x - lastOrientation.x) < 0.001 && abs(angles.z - lastOrientation.z) < 0.001 {
+            currentTime += 1
+            if currentTime > 2000 {
+                wall = location
+                
+                let plane = SCNPlane(width: 0.5, height: 0.5)
+                plane.materials.first?.diffuse.contents = UIColor(red: 0, green: 0, blue: 1, alpha: 0.7)
+                let node = SCNNode(geometry: plane)
+                node.position = location
+                node.eulerAngles.y = pointOfView.eulerAngles.y
+                print(pointOfView.eulerAngles)
+
+                
+                node.name = "wall"
+                
+                scene.rootNode.addChildNode(node)
+                
+                currentTime = 0
+            } else {
+                lastOrientation = angles
+            }
+        } else {
+            if currentTime != 0 {
+//                print("got distracted => \(currentTime)")
+            }
+            lastOrientation = angles
+            currentTime = 0
+        }
+        
+        
+        if self.floor?.name == "floor" && false {
+            self.sceneView.scene.rootNode.enumerateChildNodes({ (node, _) in
+                if node.name != "wall" && node.name != "floor" && node.position.y < (self.floor?.position.y)! && location.y > (self.floor?.position.y)! {
+
+                    node.isHidden = true
+
+                } else {
+                    node.isHidden = false
+                }
+            })
+        }
         
         DispatchQueue.main.async {
             if self.draw.isHighlighted {
@@ -86,6 +151,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         }
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first as! UITouch
+        if (touch.view == self.sceneView) {
+            print("touching")
+            
+            let location = touch.location(in: self.sceneView)
+            guard let result = sceneView.hitTest(location, options: nil).first else {
+                return
+            }
+            
+            if case self.node = result.node {
+                print("Current Node:\t\(result.node.name ?? "Without name")")
+            }
+            
+        }
     }
     
     @IBAction func slideX(_ sender: UISlider) {
@@ -120,6 +202,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         )
     }
     
+    @IBAction func wall(_ sender: Any) {
+        guard let pointOfView = sceneView.pointOfView else {return}
+        
+        
+        let transform = pointOfView.transform
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        
+        self.location.text = "Location: \(location.x)\t\(location.y)\t\(location.z)"
+        self.angle.text = "Y Angle: \(pointOfView.eulerAngles.y)"
+        
+        node = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.005, chamferRadius: 0))
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        
+        node.position = location
+        node.eulerAngles.y = pointOfView.eulerAngles.y
+        
+        node.name = "wall"
+        
+        self.sceneView.scene.rootNode.addChildNode(node)
+    }
+    
     @IBAction func add(_ sender: Any) {
         let door = SCNNode(geometry: SCNPlane(width: 0.03, height: 0.06))
         let box = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
@@ -130,7 +234,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
 
-        self.node.position = SCNVector3(0.3, 0.3, 0.3)
+        self.node.position = SCNVector3(0.3, -1, 0.3)
         box.position = SCNVector3(0, -0.05, 0)
         door.position = SCNVector3(0, -0.02, 0.051)
         
@@ -146,7 +250,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func cube(_ sender: Any) {
-        self.node.removeFromParentNode()
+//        self.node.removeFromParentNode()
         
         self.node = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
         self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue

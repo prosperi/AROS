@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -189,6 +189,34 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4W-5D-cZO">
+                                <rect key="frame" x="20" y="884" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47396980259999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3hy-Wm-0DA"/>
+                                    <constraint firstAttribute="width" constant="50" id="dkP-tl-Eub"/>
+                                </constraints>
+                                <state key="normal" title="Wall">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="wall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zFh-5N-VZl"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-mS-yIK">
+                                <rect key="frame" x="10" y="98" width="738" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz9-0a-mcJ">
+                                <rect key="frame" x="10" y="127" width="742" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -206,7 +234,9 @@
                             <constraint firstItem="e59-ck-NPr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="f1N-El-w5Q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e59-ck-NPr" secondAttribute="bottom" constant="20" id="fdz-M1-QmH"/>
                             <constraint firstItem="6lJ-Fn-Icg" firstAttribute="leading" secondItem="e59-ck-NPr" secondAttribute="trailing" constant="28" id="hG3-sC-NMh"/>
+                            <constraint firstItem="e59-ck-NPr" firstAttribute="top" secondItem="f4W-5D-cZO" secondAttribute="bottom" constant="20" id="hGE-Kl-2Iw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UBn-eQ-SC1" secondAttribute="bottom" constant="31" id="jZv-oM-75u"/>
+                            <constraint firstItem="f4W-5D-cZO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="kdv-GV-mKM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e59-ck-NPr" secondAttribute="bottom" constant="20" id="on6-Vf-nZi"/>
                             <constraint firstItem="blw-OO-bYj" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="orh-ka-06D"/>
                             <constraint firstItem="GAz-lC-9lt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="rR2-CH-j2u"/>
@@ -216,7 +246,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="angle" destination="Nz9-0a-mcJ" id="0XX-Dc-ifE"/>
                         <outlet property="draw" destination="shb-XF-PkK" id="Qk5-XB-EH4"/>
+                        <outlet property="location" destination="Hxn-mS-yIK" id="b2R-e2-wwQ"/>
                         <outlet property="sceneView" destination="blw-OO-bYj" id="oPA-qe-UeH"/>
                         <outlet property="slideScale" destination="GAz-lC-9lt" id="RyM-Ef-ti2"/>
                     </connections>
