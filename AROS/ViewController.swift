@@ -8,6 +8,10 @@
 
 import UIKit
 import ARKit
+//import UIKit.UIGestureRecognizerSubclass
+import Vision
+import Metal
+
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
@@ -24,6 +28,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var currentTime = 0
     var wall: SCNVector3?
     var lastOrientation = SCNVector3(0,0,0)
+    var position = SCNVector3(0, 0, 0)
+    
+    let PIXEL_TO_METERS : Float = 0.00026458333333333 * 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +49,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.slideScale.transform = CGAffineTransform.init(rotationAngle: -.pi / 2)
         self.draw.layer.cornerRadius = 10
         self.draw.clipsToBounds = true
+        
         
     }
 
@@ -77,7 +85,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
 
-        
         guard let pointOfView = sceneView.pointOfView else {return}
         
         
@@ -88,6 +95,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
        
       
         let position = orientation + location
+        self.position = position
 
         if abs(angles.x - lastOrientation.x) < 0.001 && abs(angles.z - lastOrientation.z) < 0.001 {
             currentTime += 1
@@ -111,9 +119,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 lastOrientation = angles
             }
         } else {
-            if currentTime != 0 {
-//                print("got distracted => \(currentTime)")
-            }
             lastOrientation = angles
             currentTime = 0
         }
@@ -150,22 +155,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 pointer.geometry?.firstMaterial?.diffuse.contents = UIColor.red
             }
         }
-        
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first as! UITouch
         if (touch.view == self.sceneView) {
-            print("touching")
+            print("Touching")
             
             let location = touch.location(in: self.sceneView)
             guard let result = sceneView.hitTest(location, options: nil).first else {
                 return
             }
             
-            if case self.node = result.node {
-                print("Current Node:\t\(result.node.name ?? "Without name")")
-            }
+            print("Current Node:\t\(result.node.name ?? "Without name")")
+            
+            self.node = result.node
+
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first as! UITouch
+        
+        if self.node.name != "cube" {
+            return
+        }
+        
+        if (touch.view == self.sceneView) {
+            print("Moving")
+            
+            let location = touch.location(in: self.sceneView)
+            let previousLocation = touch.previousLocation(in: self.sceneView)
+            
+            let change = (location - previousLocation) * self.PIXEL_TO_METERS
+            print("Location:\t \(location)\tprevious:\t\(previousLocation)")
+            
+            
+            self.node.position.x = self.node.position.x + Float(change.x)
+            self.node.position.y = self.node.position.y - Float(change.y)
             
         }
     }
@@ -250,15 +278,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func cube(_ sender: Any) {
-//        self.node.removeFromParentNode()
         
-        self.node = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
-        self.node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
-        self.node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
+        let node = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        node.geometry?.firstMaterial?.specular.contents = UIColor.yellow
 
-        self.node.position = SCNVector3(0, 0, 0)
+        node.position = self.position
+        node.name = "cube"
         
-        self.sceneView.scene.rootNode.addChildNode(self.node)
+        self.sceneView.scene.rootNode.addChildNode(node)
     }
     
     @IBAction func sphere(_ sender: Any) {
@@ -358,6 +386,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
     return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
+}
+
+func -(left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x - right.x, y: left.y - right.y)
+}
+
+func *(left: CGPoint, right: Float) -> CGPoint {
+    return CGPoint(x: left.x * CGFloat(right), y: left.y * CGFloat(right))
 }
 
 
