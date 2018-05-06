@@ -217,6 +217,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etd-Th-xK5">
+                                <rect key="frame" x="10" y="156" width="742" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -249,6 +256,7 @@
                         <outlet property="angle" destination="Nz9-0a-mcJ" id="0XX-Dc-ifE"/>
                         <outlet property="draw" destination="shb-XF-PkK" id="Qk5-XB-EH4"/>
                         <outlet property="location" destination="Hxn-mS-yIK" id="b2R-e2-wwQ"/>
+                        <outlet property="results" destination="etd-Th-xK5" id="Qhm-Bo-Bx4"/>
                         <outlet property="sceneView" destination="blw-OO-bYj" id="oPA-qe-UeH"/>
                         <outlet property="slideScale" destination="GAz-lC-9lt" id="RyM-Ef-ti2"/>
                     </connections>

@@ -8,10 +8,8 @@
 
 import UIKit
 import ARKit
-//import UIKit.UIGestureRecognizerSubclass
 import Vision
-import Metal
-
+import AVFoundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
@@ -21,6 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var draw: UIButton!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var angle: UILabel!
+    @IBOutlet weak var results: UILabel!
     
     let configuration = ARWorldTrackingConfiguration()
     var node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
@@ -29,7 +28,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var wall: SCNVector3?
     var lastOrientation = SCNVector3(0,0,0)
     var position = SCNVector3(0, 0, 0)
-    
+
+    // vision
+    var visionRequests = [VNRequest]()
+    let dispatchQueueML = DispatchQueue(label: "com.hw.dispatchqueueml")
+
     let PIXEL_TO_METERS : Float = 0.00026458333333333 * 5
     
     override func viewDidLoad() {
@@ -40,6 +43,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         } else {
             // Fallback on earlier versions
         }
+        
+        guard let camera = AVCaptureDevice.default(for: .video) else {
+            fatalError("No video camera available")
+        }
+        
+        
+        
         configuration.planeDetection = .horizontal
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         self.sceneView.session.run(configuration)
@@ -50,7 +60,97 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.draw.layer.cornerRadius = 10
         self.draw.clipsToBounds = true
         
+
         
+//        session.sessionPreset = .high
+//        previewLayer = AVCaptureVideoPreviewLayer(session: session)
+//
+//        sceneView.layer.addSublayer(previewLayer)
+//
+//        let cameraInput = try? AVCaptureDeviceInput(device: camera)
+//        let videoOutput = AVCaptureVideoDataOutput()
+//        videoOutput.setSampleBufferDelegate(self, queue: captureQueue)
+//        videoOutput.alwaysDiscardsLateVideoFrames = true
+//        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
+//
+//        session.addInput(cameraInput!)
+//        session.addOutput(videoOutput)
+//
+//        let conn = videoOutput.connection(with: .video)
+//        conn?.videoOrientation = .portrait
+//
+//        session.startRunning()
+        
+        guard let visionModel = try? VNCoreMLModel(for: Resnet50().model) else {
+            fatalError("Could not load model")
+        }
+
+        let classificationRequest = VNCoreMLRequest(model: visionModel, completionHandler: handleClassifications)
+        classificationRequest.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop
+        visionRequests = [classificationRequest]
+        
+        loopCoreMLUpdate()
+    }
+    
+    func loopCoreMLUpdate () {
+        dispatchQueueML.async {
+            self.updateCoreML()
+            
+            self.loopCoreMLUpdate()
+        }
+    }
+    
+    func updateCoreML () {
+        
+        guard let pixelBuffer = self.sceneView.session.currentFrame?.capturedImage else {
+            return
+        }
+        
+//        var requestOptions:[VNImageOption: Any] = [:]
+//
+//        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil){
+//            requestOptions = [.cameraIntrinsics: cameraIntrinsicData]
+//        }
+//
+//        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
+        
+        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+        let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+        
+        do {
+            try imageRequestHandler.perform(self.visionRequests)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func handleClassifications(request: VNRequest, error: Error?) {
+        print("interesting")
+        if let theError = error {
+            print("Error: \(theError.localizedDescription)")
+            return
+        }
+        
+        guard let observations = request.results else {
+            print("No results")
+            return
+        }
+        
+        let classifications = observations[0...4]
+            .compactMap({ $0 as? VNClassificationObservation })
+            .map({ "\($0.identifier) \(($0.confidence * 100.0).rounded())" })
+            .joined(separator: "\n")
+        
+        
+        print(classifications)
+        
+        DispatchQueue.main.async {
+            self.results.text = classifications
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,7 +207,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let node = SCNNode(geometry: plane)
                 node.position = location
                 node.eulerAngles.y = pointOfView.eulerAngles.y
-                print(pointOfView.eulerAngles)
 
                 
                 node.name = "wall"
@@ -161,14 +260,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first as! UITouch
         if (touch.view == self.sceneView) {
-            print("Touching")
             
             let location = touch.location(in: self.sceneView)
             guard let result = sceneView.hitTest(location, options: nil).first else {
                 return
             }
             
-            print("Current Node:\t\(result.node.name ?? "Without name")")
             
             self.node = result.node
 
@@ -183,13 +280,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         if (touch.view == self.sceneView) {
-            print("Moving")
             
             let location = touch.location(in: self.sceneView)
             let previousLocation = touch.previousLocation(in: self.sceneView)
             
             let change = (location - previousLocation) * self.PIXEL_TO_METERS
-            print("Location:\t \(location)\tprevious:\t\(previousLocation)")
             
             
             self.node.position.x = self.node.position.x + Float(change.x)
