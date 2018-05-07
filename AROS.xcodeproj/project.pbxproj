@@ -16,7 +16,6 @@
 		E023226B20A09B3000B002B3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226A20A09B3000B002B3 /* CoreFoundation.framework */; };
 		E023226D20A09B3600B002B3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226C20A09B3600B002B3 /* Accelerate.framework */; };
 		E023227B20A09DDD00B002B3 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = E023227A20A09DDD00B002B3 /* OpenCVWrapper.mm */; };
-		E023227F20A0D80B00B002B3 /* mandrill.png in Resources */ = {isa = PBXBuildFile; fileRef = E023227E20A0D80B00B002B3 /* mandrill.png */; };
 		E0D3209E2071CF2E005862F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D3209D2071CF2E005862F2 /* AppDelegate.swift */; };
 		E0D320A02071CF2E005862F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D3209F2071CF2E005862F2 /* ViewController.swift */; };
 		E0D320A32071CF2E005862F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D320A12071CF2E005862F2 /* Main.storyboard */; };
@@ -56,7 +55,6 @@
 		E023227920A09DDD00B002B3 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		E023227A20A09DDD00B002B3 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		E023227C20A09EA500B002B3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		E023227E20A0D80B00B002B3 /* mandrill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mandrill.png; sourceTree = "<group>"; };
 		E0D3209A2071CF2E005862F2 /* AROS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AROS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D3209D2071CF2E005862F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0D3209F2071CF2E005862F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 		E023227D20A0D7DE00B002B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E023227E20A0D80B00B002B3 /* mandrill.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -293,7 +290,6 @@
 			files = (
 				E0D320A82071CF2E005862F2 /* LaunchScreen.storyboard in Resources */,
 				E0D320A52071CF2E005862F2 /* Assets.xcassets in Resources */,
-				E023227F20A0D80B00B002B3 /* mandrill.png in Resources */,
 				E0D320A32071CF2E005862F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
