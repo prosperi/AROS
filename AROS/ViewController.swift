@@ -60,28 +60,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.draw.layer.cornerRadius = 10
         self.draw.clipsToBounds = true
         
-
-        
-//        session.sessionPreset = .high
-//        previewLayer = AVCaptureVideoPreviewLayer(session: session)
-//
-//        sceneView.layer.addSublayer(previewLayer)
-//
-//        let cameraInput = try? AVCaptureDeviceInput(device: camera)
-//        let videoOutput = AVCaptureVideoDataOutput()
-//        videoOutput.setSampleBufferDelegate(self, queue: captureQueue)
-//        videoOutput.alwaysDiscardsLateVideoFrames = true
-//        videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
-//
-//        session.addInput(cameraInput!)
-//        session.addOutput(videoOutput)
-//
-//        let conn = videoOutput.connection(with: .video)
-//        conn?.videoOrientation = .portrait
-//
-//        session.startRunning()
-        
-        guard let visionModel = try? VNCoreMLModel(for: Resnet50().model) else {
+        guard let visionModel = try? VNCoreMLModel(for: Hand().model) else {
             fatalError("Could not load model")
         }
 
@@ -105,15 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard let pixelBuffer = self.sceneView.session.currentFrame?.capturedImage else {
             return
         }
-        
-//        var requestOptions:[VNImageOption: Any] = [:]
-//
-//        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil){
-//            requestOptions = [.cameraIntrinsics: cameraIntrinsicData]
-//        }
-//
-//        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 1)!, options: requestOptions)
-        
+
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
         let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
         
@@ -125,7 +96,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func handleClassifications(request: VNRequest, error: Error?) {
-        print("interesting")
         if let theError = error {
             print("Error: \(theError.localizedDescription)")
             return
@@ -135,14 +105,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             print("No results")
             return
         }
+       
         
-        let classifications = observations[0...4]
+        let observation = observations[0] as? VNClassificationObservation
+
+        switch observation?.identifier {
+        case "hand-spread":
+            self.node.opacity = 1
+            self.node.eulerAngles.y += 0.05
+        case "hand-together":
+            self.node.opacity = CGFloat(((observation?.confidence)! * 100.0).rounded() / 100.0)
+        case "no-hand":
+            self.node.opacity = 1
+        default:
+            self.node.opacity = 0
+        }
+        
+        
+        print(self.node.opacity)
+        
+        let classifications = observations
             .compactMap({ $0 as? VNClassificationObservation })
             .map({ "\($0.identifier) \(($0.confidence * 100.0).rounded())" })
             .joined(separator: "\n")
         
-        
-        print(classifications)
         
         DispatchQueue.main.async {
             self.results.text = classifications
@@ -179,7 +165,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         floor.name = "floor"
         
         node.name = "floor"
-        node.addChildNode(floor)
+//        node.addChildNode(floor)
         self.floor = floor
     }
     
