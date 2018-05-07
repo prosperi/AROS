@@ -224,6 +224,10 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVY-44-a1V">
+                                <rect key="frame" x="598" y="729" width="154" height="205"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -255,6 +259,7 @@
                     <connections>
                         <outlet property="angle" destination="Nz9-0a-mcJ" id="0XX-Dc-ifE"/>
                         <outlet property="draw" destination="shb-XF-PkK" id="Qk5-XB-EH4"/>
+                        <outlet property="grayView" destination="yVY-44-a1V" id="hJ5-d2-1iI"/>
                         <outlet property="location" destination="Hxn-mS-yIK" id="b2R-e2-wwQ"/>
                         <outlet property="results" destination="etd-Th-xK5" id="Qhm-Bo-Bx4"/>
                         <outlet property="sceneView" destination="blw-OO-bYj" id="oPA-qe-UeH"/>

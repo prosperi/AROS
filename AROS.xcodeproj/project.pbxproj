@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		E0232250209E519800B002B3 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E023224F209E519800B002B3 /* Resnet50.mlmodel */; };
 		E0232260209FF82200B002B3 /* Hand.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E023225F209FF82200B002B3 /* Hand.mlmodel */; };
+		E023226320A09AE200B002B3 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226220A09AE200B002B3 /* opencv2.framework */; };
+		E023226520A09AFC00B002B3 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226420A09AFC00B002B3 /* AssetsLibrary.framework */; };
+		E023226720A09B0800B002B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226620A09B0800B002B3 /* CoreGraphics.framework */; };
+		E023226920A09B2400B002B3 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226820A09B2400B002B3 /* CoreMedia.framework */; };
+		E023226B20A09B3000B002B3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226A20A09B3000B002B3 /* CoreFoundation.framework */; };
+		E023226D20A09B3600B002B3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E023226C20A09B3600B002B3 /* Accelerate.framework */; };
+		E023227B20A09DDD00B002B3 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = E023227A20A09DDD00B002B3 /* OpenCVWrapper.mm */; };
 		E0D3209E2071CF2E005862F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D3209D2071CF2E005862F2 /* AppDelegate.swift */; };
 		E0D320A02071CF2E005862F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D3209F2071CF2E005862F2 /* ViewController.swift */; };
 		E0D320A32071CF2E005862F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D320A12071CF2E005862F2 /* Main.storyboard */; };
@@ -38,6 +45,16 @@
 /* Begin PBXFileReference section */
 		E023224F209E519800B002B3 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 		E023225F209FF82200B002B3 /* Hand.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Hand.mlmodel; sourceTree = "<group>"; };
+		E023226220A09AE200B002B3 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../Downloads/opencv2.framework; sourceTree = "<group>"; };
+		E023226420A09AFC00B002B3 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E023226620A09B0800B002B3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E023226820A09B2400B002B3 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E023226A20A09B3000B002B3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		E023226C20A09B3600B002B3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		E023227820A09DDD00B002B3 /* AROS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AROS-Bridging-Header.h"; sourceTree = "<group>"; };
+		E023227920A09DDD00B002B3 /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
+		E023227A20A09DDD00B002B3 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		E023227C20A09EA500B002B3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		E0D3209A2071CF2E005862F2 /* AROS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AROS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D3209D2071CF2E005862F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0D3209F2071CF2E005862F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +75,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E023226D20A09B3600B002B3 /* Accelerate.framework in Frameworks */,
+				E023226B20A09B3000B002B3 /* CoreFoundation.framework in Frameworks */,
+				E023226920A09B2400B002B3 /* CoreMedia.framework in Frameworks */,
+				E023226720A09B0800B002B3 /* CoreGraphics.framework in Frameworks */,
+				E023226520A09AFC00B002B3 /* AssetsLibrary.framework in Frameworks */,
+				E023226320A09AE200B002B3 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +101,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E023226120A09AE100B002B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E023226C20A09B3600B002B3 /* Accelerate.framework */,
+				E023226A20A09B3000B002B3 /* CoreFoundation.framework */,
+				E023226820A09B2400B002B3 /* CoreMedia.framework */,
+				E023226620A09B0800B002B3 /* CoreGraphics.framework */,
+				E023226420A09AFC00B002B3 /* AssetsLibrary.framework */,
+				E023226220A09AE200B002B3 /* opencv2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E0D320912071CF2E005862F2 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +121,7 @@
 				E0D320B12071CF2E005862F2 /* AROSTests */,
 				E0D320BC2071CF2E005862F2 /* AROSUITests */,
 				E0D3209B2071CF2E005862F2 /* Products */,
+				E023226120A09AE100B002B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +138,9 @@
 		E0D3209C2071CF2E005862F2 /* AROS */ = {
 			isa = PBXGroup;
 			children = (
+				E023227C20A09EA500B002B3 /* PrefixHeader.pch */,
+				E023227920A09DDD00B002B3 /* OpenCVWrapper.h */,
+				E023227A20A09DDD00B002B3 /* OpenCVWrapper.mm */,
 				E023225F209FF82200B002B3 /* Hand.mlmodel */,
 				E023224F209E519800B002B3 /* Resnet50.mlmodel */,
 				E0D3209D2071CF2E005862F2 /* AppDelegate.swift */,
@@ -109,6 +149,7 @@
 				E0D320A42071CF2E005862F2 /* Assets.xcassets */,
 				E0D320A62071CF2E005862F2 /* LaunchScreen.storyboard */,
 				E0D320A92071CF2E005862F2 /* Info.plist */,
+				E023227820A09DDD00B002B3 /* AROS-Bridging-Header.h */,
 			);
 			path = AROS;
 			sourceTree = "<group>";
@@ -199,6 +240,7 @@
 				TargetAttributes = {
 					E0D320992071CF2E005862F2 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 					E0D320AD2071CF2E005862F2 = {
@@ -266,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0D320A02071CF2E005862F2 /* ViewController.swift in Sources */,
+				E023227B20A09DDD00B002B3 /* OpenCVWrapper.mm in Sources */,
 				E0232250209E519800B002B3 /* Resnet50.mlmodel in Sources */,
 				E0D3209E2071CF2E005862F2 /* AppDelegate.swift in Sources */,
 				E0232260209FF82200B002B3 /* Hand.mlmodel in Sources */,
@@ -434,12 +477,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63U9BE4A54;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					/Users/prosperi/Downloads/,
+					"$(PROJECT_DIR)/",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/AROS/PrefixHeader.pch";
 				INFOPLIST_FILE = AROS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.prosperri.AROS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AROS/AROS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,12 +501,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 63U9BE4A54;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(PROJECT_DIR)",
+					/Users/prosperi/Downloads/,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/AROS/PrefixHeader.pch";
 				INFOPLIST_FILE = AROS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.prosperri.AROS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AROS/AROS-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

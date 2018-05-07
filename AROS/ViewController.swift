@@ -20,6 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var angle: UILabel!
     @IBOutlet weak var results: UILabel!
+    @IBOutlet weak var grayView: UIImageView!
     
     let configuration = ARWorldTrackingConfiguration()
     var node = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
@@ -44,12 +45,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Fallback on earlier versions
         }
         
-        guard let camera = AVCaptureDevice.default(for: .video) else {
-            fatalError("No video camera available")
-        }
-        
-        
-        
+        print("OpenCV Version - \(OpenCVWrapper.openCVVersionString())")
+            
         configuration.planeDetection = .horizontal
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         self.sceneView.session.run(configuration)
@@ -121,9 +118,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.node.opacity = 0
         }
         
-        
-        print(self.node.opacity)
-        
         let classifications = observations
             .compactMap({ $0 as? VNClassificationObservation })
             .map({ "\($0.identifier) \(($0.confidence * 100.0).rounded())" })
@@ -165,13 +159,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         floor.name = "floor"
         
         node.name = "floor"
-//        node.addChildNode(floor)
+        //node.addChildNode(floor)
         self.floor = floor
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
 
         guard let pointOfView = sceneView.pointOfView else {return}
+        
+        guard let pixelBuffer = self.sceneView.session.currentFrame?.capturedImage else {
+           return
+        }
+        
         
         
         let transform = pointOfView.transform
@@ -222,6 +221,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         DispatchQueue.main.async {
+            
+            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+            let uiImage = UIImage(ciImage: ciImage)
+            let grayImage = OpenCVWrapper.toGray(uiImage)
+            self.grayView.image = grayImage
+            
             if self.draw.isHighlighted {
                 let node = SCNNode(geometry: SCNSphere(radius: 0.01))
                 node.position = position
@@ -239,6 +244,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.sceneView.scene.rootNode.addChildNode(pointer)
                 pointer.geometry?.firstMaterial?.diffuse.contents = UIColor.red
             }
+            
+            
+            
         }
     }
     
