@@ -16,7 +16,7 @@ Tech: Swift 4.0, Xcode 9.3, CoreML, ARkit, OpenCV, iOS 11.3, iPad(5th generation
 
 Right now user can place simple 3D objects, scale and rotate them. 
 
-![Alt Text](https://media.giphy.com/media/8w3rIywizjXb0opWwO/giphy.gif)
+![](https://media.giphy.com/media/8w3rIywizjXb0opWwO/giphy.gif)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=QDpsCbMRa8g" target="_blank">Demo</a>
 
@@ -25,14 +25,15 @@ Right now user can place simple 3D objects, scale and rotate them.
 
 Draw button can be used to draw in AR. The tool takes the center of the view and puts a small sphere at each point. Those spheres can be also scaled by selecting the node on the device screen and using the sliders to rotate and scale, providing ability to build various shapes.
 
-![Alt Text](https://media.giphy.com/media/p4niJSOoGxb50l9VH8/giphy.gif)
+![](https://media.giphy.com/media/p4niJSOoGxb50l9VH8/giphy.gif)
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=Wwu_rnEdLpU" target="_blank">Demo</a>
 
 ## Plane detection
 
 AROS detects horizontal surfaces using ARKit's `planeDetection` attribute (set to .horizontal). There are two ways to detect vertical planes - holding device next to the vertical plane for couple seconds without moving it and holding device next to the vertical plane and using  a button to generate vertical plane at that position. 
 
-![Alt Text](https://media.giphy.com/media/XJc7MafmYKG2wi7591/giphy.gif)
+![](https://media.giphy.com/media/XJc7MafmYKG2wi7591/giphy.gif)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=WSfaE5cKKjI" target="_blank">Demo</a>
 
@@ -44,7 +45,7 @@ Occlusion is one of the most difficult tasks to be achieved in AR. Right now the
 
 The tool provides ability to move AR nodes around by interacting with the device surface. Right now user can change only `x` and `y` coordinates of the object, but same logic can be used to modify the `z` coordinate too.
 
-![Alt Text](https://media.giphy.com/media/B31PV2o2518xj3Umpc/giphy.gif)
+![](https://media.giphy.com/media/B31PV2o2518xj3Umpc/giphy.gif)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=KD36G6sLRlE" target="_blank">Demo</a>
 
@@ -56,7 +57,7 @@ AROS uses CoreML to detect human hand. Right now there are 4 main classifiers - 
   - Node starts rotating around y axis (user has the fingers spread)
   - Node stops rotating (user has fingers together)
 
-![Alt Text](https://media.giphy.com/media/1rM4P7NZG1SokdjlZq/giphy.gif)
+![](https://media.giphy.com/media/1rM4P7NZG1SokdjlZq/giphy.gif)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=tM9XeGntuV0" target="_blank">Demo</a>
 
