@@ -57,7 +57,7 @@ AROS uses CoreML to detect human hand. Right now there are 4 main classifiers - 
   - Node starts rotating around y axis (user has the fingers spread)
   - Node stops rotating (user has fingers together)
 
-![](https://media.giphy.com/media/cWmQsB4LhvYD6SJt4J/giphy.gif)
+![](https://media.giphy.com/media/4H8Wiv7XUS8RVHWC8W/giphy.gif)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=tM9XeGntuV0" target="_blank">Demo</a>
 
