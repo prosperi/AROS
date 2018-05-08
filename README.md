@@ -75,3 +75,9 @@ AROS uses CoreML to detect human hand. Right now there are 4 main classifiers - 
 
 - Clean up the code and come up with a better structure
 
+
+
+# Credits
+
+- <a href="https://medium.com/@yiweini/opencv-with-swift-step-by-step-c3cc1d1ee5f1" target="_blank">OpenCV with Swift - step by step</a>
+- <a href="https://medium.com/@hunter.ley.ward/ml-on-ios-running-coreml-on-ios-f9cb340f3855" target="_blank">Getting Started with Core ML — ML on iOS</a>
