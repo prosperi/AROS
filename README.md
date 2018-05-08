@@ -16,7 +16,7 @@ Tech: Swift 4.0, Xcode 9.3, CoreML, ARkit, OpenCV, iOS 11.3, iPad(5th generation
 
 Right now user can place simple 3D objects, scale and rotate them. 
 
-![](https://media.giphy.com/media/8w3rIywizjXb0opWwO/giphy.gif)
+![](https://media.giphy.com/media/macDtWMiBBWKlKgSUj/giphy.gif)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=QDpsCbMRa8g" target="_blank">Demo</a>
 
